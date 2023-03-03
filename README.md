@@ -1,6 +1,4 @@
-# Tests Solutions - Building an Adaptive Shiny Based Digital Twin Platform for Industrial Applications
-Edit New page 
-
+# Tests Solutions - Project: Building an adaptive shiny-based digital twin platform using the Shiny framework in R
 
 [![R version](https://img.shields.io/badge/R%20version-4.1.0-blue.svg)](https://www.r-project.org/)
 [![GSoC](https://img.shields.io/badge/GSoC-2023-red.svg)](https://summerofcode.withgoogle.com/)
@@ -39,7 +37,7 @@ Develop a dummy code of 5 functions and a vignette and pass it with no Error/War
 
 ### Solution 
 
-The hard test involved creating a package called "squarepolynomials" with 5 functions for working with the square of polynomials, including root finding, min/max identification, visualization, and value finding. A vignette was developed to demonstrate the usage of the package, and the package was successfully tested with no errors, warnings, or notes using https://win-builder.r-project.org/. The project demonstrates strong proficiency in R programming, data manipulation, and package development.
+The hard test involved creating a package called "squarepolynomials" with 5 functions for working with the square of polynomials, including root finding, min/max identification, visualization, and value finding. A vignette was developed to demonstrate the usage of the package, and the package was successfully tested with no errors, warnings, or notes on https://win-builder.r-project.org/. This demonstrates ,y strong proficiency in R programming, data manipulation, and package development.
 
 
 
