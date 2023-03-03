@@ -1,0 +1,163 @@
+---
+title: "Easy Test"
+author: "Oliver Vu" 
+output: html_document
+date: '2023-03-02'
+---
+
+```{r setup, include=FALSE}
+library(leaflet)
+library(dplyr)
+library(leaflet)
+library(leaflet.extras)
+library(RColorBrewer)
+library(lubridate)
+library(shiny)
+library(shiny)
+library(leaflet)
+library(RColorBrewer)
+```
+
+#### Test Description: Download the leaflet package and demonstrate it with a naturally occurring time series. Document it with RMarkdown.
+
+### 1. Creating an interactive map visualising earthquake data using the `quakes` dataset. 
+
+```{r}
+# Load example data
+data(quakes)
+
+# Create leaflet map
+leaflet(quakes) %>%
+  addTiles() %>%
+  addMarkers(
+    popup = ~paste(
+      "<strong>Location:</strong> ", quakes$lat, ", ", quakes$long, "<br>",
+      "<strong>Magnitude:</strong> ", quakes$mag, "<br>",
+      "<strong>Depth:</strong> ", quakes$depth, "km"
+    ),
+    label = ~as.character(quakes$mag)
+  ) %>%
+  addLegend(
+    "bottomright",
+    title = "Magnitude",
+    colors = c("green", "yellow", "red"),
+    labels = c("4-5", "5-6", "6+")
+  ) %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  addMiniMap()
+
+```
+
+
+### 2. Creating an interactive map visualising a mock dataset of a property company.  
+
+```{r}
+
+df2 <- read.table(header = T, text = '
+latitude	longitude	Flat	Land	Office
+42.85	-2.6727	5	22	25
+38.3452	-0.4815	2	24	25
+38.161	-0.8013	5	17	11
+38.1631	-0.8115	5	22	24
+38.1673	-0.8034	5	15	13
+38.1776	-0.7973	5	21	16
+37.9787	-0.6822	2	11	16
+38.2622	-0.7011	61	24	16
+39.9333	-0.1	0	14	13
+38.0848	-0.944	0	21	21
+38.125	-0.8782	3	18	14
+38.1339	-0.8624	3	12	15
+38.1518	-0.8308	3	21	20
+38.6253	-0.5722	3	14	14
+')
+
+leaflet(df2) %>%
+  addTiles() %>%
+  addMarkers(lat = ~latitude, lng = ~longitude, 
+             clusterOptions = markerClusterOptions(zoomToBoundsOnClick = T), 
+              icon = list(
+               iconUrl = 'https://colepowered.com/wordpress/wp-content/uploads/2014/10/29102014-8.png',
+               iconSize = c(75, 75)),
+             popup = ~paste(
+               paste('<b>', 'Flat:', '</b>', Flat), 
+               paste('<b>',  'Land:', '</b>', Land),
+               paste('<b>', 'Office:', Office),
+               sep = '<br/>'),
+             popupOptions = popupOptions(closeButton = FALSE)
+             )
+```
+
+
+### 3. Creating an interactive map of earthquake data using `Shiny` and `Leaflet` 
+```{r}
+
+
+ui <- bootstrapPage(
+  tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
+  leafletOutput("map", width = "100%", height = "100%"),
+  absolutePanel(top = 10, right = 10,
+    sliderInput("range", "Magnitudes", min(quakes$mag), max(quakes$mag),
+      value = range(quakes$mag), step = 0.1
+    ),
+    selectInput("colors", "Color Scheme",
+      rownames(subset(brewer.pal.info, category %in% c("seq", "div")))
+    ),
+    checkboxInput("legend", "Show legend", TRUE)
+  )
+)
+
+server <- function(input, output, session) {
+
+  # Reactive expression for the data subsetted to what the user selected
+  filteredData <- reactive({
+    quakes[quakes$mag >= input$range[1] & quakes$mag <= input$range[2],]
+  })
+
+  # This reactive expression represents the palette function,
+  # which changes as the user makes selections in UI.
+  colorpal <- reactive({
+    colorNumeric(input$colors, quakes$mag)
+  })
+
+  output$map <- renderLeaflet({
+    # Use leaflet() here, and only include aspects of the map that
+    # won't need to change dynamically (at least, not unless the
+    # entire map is being torn down and recreated).
+    leaflet(quakes) %>% addTiles() %>%
+      fitBounds(~min(long), ~min(lat), ~max(long), ~max(lat))
+  })
+
+  # Incremental changes to the map (in this case, replacing the
+  # circles when a new color is chosen) should be performed in
+  # an observer. Each independent set of things that can change
+  # should be managed in its own observer.
+  observe({
+    pal <- colorpal()
+
+    leafletProxy("map", data = filteredData()) %>%
+      clearShapes() %>%
+      addCircles(radius = ~10^mag/10, weight = 1, color = "#777777",
+        fillColor = ~pal(mag), fillOpacity = 0.7, popup = ~paste(mag)
+      )
+  })
+
+  # Use a separate observer to recreate the legend as needed.
+  observe({
+    proxy <- leafletProxy("map", data = quakes)
+
+    # Remove any existing legend, and only if the legend is
+    # enabled, create a new one.
+    proxy %>% clearControls()
+    if (input$legend) {
+      pal <- colorpal()
+      proxy %>% addLegend(position = "bottomright",
+        pal = pal, values = ~mag
+      )
+    }
+  })
+}
+
+shinyApp(ui, server)
+```
+
+

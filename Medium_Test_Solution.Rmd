@@ -1,0 +1,41 @@
+---
+title: "Meidium Test"
+output: html_document
+oauthor: "Oliver Vu" 
+date: '2023-03-03'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Test Description: Suggest possible updates or a new feature you would like to include in the next version of the leaflet package.
+
+**Real-time data integration** would be my suggestion to be added in the next version of the leaflet package. Detailed explaination and information are provided below. 
+
+#### 1.1 Explaination 
+
+With the addition of real-time data integration feature, Leaflet would be able to include live data streams into its already-existing geographical data visualisation capabilities. Users would then be able to view and edit real-time data on a Leaflet map, such as the whereabouts of cars, the condition of equipment, or the availability of resources. Many sources, such GPS sensors, IoT devices, or API endpoints, can provide real-time data streams.
+
+Users would be able to construct dynamic, interactive maps that react in real-time to data changes with the functionality. A logistics business, for instance, may use Leaflet to track the whereabouts of delivery vehicles in real-time and modify their routes or schedules as necessary. Similar to how a fire department or ambulance service may utilise Leaflet to track their whereabouts and attend to emergencies more swiftly.
+
+In addition to enhancing Leaflet's already robust capabilities for geographical data visualisation and mapping, the proposed functionality would also bring a new level of interaction and responsiveness. Users would be able to produce more effective and practical maps and make quicker and better-informed decisions based on real-time data.
+
+#### 1.2 Related work 
+
+There are several existing tools and packages that provide real-time data integration and visualization capabilities. For instance, a well-known data visualisation package called D3.js can be used to make dynamic, interactive maps that incorporate real-time data feeds. The same real-time data visualisation features are offered by Mapbox, including the capacity to show and update data flows from GPS sensors and other sources. 
+
+A number of open-source frameworks and packages are also available that offer real-time data integration for certain use cases or applications. For instance, OpenLayers is a JavaScript framework that contains real-time data visualisation features for viewing and manipulating geographic data. For the real-time tracking and display of moving objects, such as satellites or aircraft, Cesium is a 3D geospatial platform.
+
+However, while there are many tools and packages that provide real-time data integration and visualization capabilities, there are also several challenges and limitations associated with this approach. Despite these challenges, there is growing demand for real-time data integration and visualization capabilities, particularly in industries such as logistics, transportation, and emergency services. The proposed feature for Leaflet would help to address this demand by providing a user-friendly and flexible tool for real-time data visualization and mapping.
+
+#### 1.3 Benefits to the community 
+
+**Improved operations:** Real-time data integration would provide a useful tool for users in a variety of industries to build a better interactive map with real-time data to optimize their operations. 
+
+**Increased collaboration:** The open-source nature of the platform would allow other developers to build upon and improve the technology, resulting in a more robust and user-friendly tool for the community.
+
+**Enhanced safety and reliability:** Real-time data integration in Leaflet would have significant safety and reliability benefits, particularly in industries such as emergency services and transportation.
+
+
+

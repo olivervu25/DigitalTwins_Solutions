@@ -1,0 +1,9 @@
+Package: squarepolynomial
+Title: Square Polynomial Function
+Version: 0.0.0.9000
+Author: Oliver Vu
+Maintainer: Oliver Vu <longvu2000.study@gmail.com>
+Description: The square_polynomial package provides a collection of functions for working with quadratic equations and finding their roots. These functions can be used to perform basic algebraic operations, such as expanding and factoring quadratic expressions, and to solve quadratic equations both numerically and symbolically. Additionally, the package includes tools for visualizing quadratic functions and their roots using graphical representations. This package is designed for use by students and educators in algebra and precalculus courses, as well as anyone interested in exploring quadratic equations and their properties.
+License: MIT
+Encoding: UTF-8
+LazyData: true
