@@ -25,6 +25,10 @@ For the easy task, I utilized the `Leaflet` package to create interactive maps f
 
 ### Description
 
+Suggest possible updates or a new feature you would like to include in the next version of the leaflet package.
+
+### Solution 
+
 Real-time data integration is my suggestion as a valuable addition to the Leaflet package in future versions. This feature would allow developers to incorporate live data feeds directly into their Leaflet maps, updating the visualizations in real-time as new data becomes available.
 
 <hr style="height: 5px; border: none; color: #000000; background-color: #000000; margin: 20px 0px;">
